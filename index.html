@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+    <link href='styles.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div id="header">
+      <h1> Get a wikipedia page in bunches</h1>
+    </div>
+    <div id="error">
+      Cannot connect to that URL, please provide one in the form http://www.smu.edu/
+    </div>
+    <div id="siteinput">
+      <ul class="input-list style-1 clearfix">
+        <li>
+            <input id="urlinput" type="text" onkeypress="handle(event)" placeholder="Dallas Texas">
+        </li>
+      </ul>
+    </div>
+    <div id="result">
+    </div>
+  </body>
+
+  <script>
+  function handle(event) {
+    if (event.keyCode !== 13) {return;}
+    var input = document.getElementById("urlinput");
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        var data = JSON.parse(request.responseText);
+        console.log(data);
+        if (data[0] === "BAD_URL") {
+          console.log("bad url");
+        } else {
+          console.log(data);
+          getsections(data[0][0]);
+        }
+      }
+    };
+    request.open("POST", "/api/search");
+    request.setRequestHeader("content-type", "application/json");
+    request.send(JSON.stringify(
+      {"termstring": input.value}
+    ));
+  }
+
+  function getsections(data) {
+    console.log("getting sections", data);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+      if (request.readyState === 4) {
+        var section_data = JSON.parse(request.responseText)[0];
+        console.log(section_data);
+        getsectiontext(data, 1);
+      }
+    }
+    request.open("POST", "/api/getsections");
+    request.setRequestHeader("content-type", "application/json");
+    request.send(JSON.stringify(
+      {"pagename" : data}
+    ));
+  }
+
+  function getsectiontext(page, section) {
+    console.log("getting section text");
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+      if (request.readyState === 4) {
+        var section_text = JSON.parse(request.responseText);
+        console.log(section_text);
+        var result_div = document.getElementById("result");
+        result.innerHTML = read_huffman_string(section_text[0], section_text[1]);
+        result.style.display = 'block';
+      }
+    }
+    request.open("POST", "/api/getsection");
+    request.setRequestHeader("content-type", "application/json");
+    request.send(JSON.stringify(
+      {"sectionindex" : section,
+        "pagename" : page}
+    ));
+  }
+
+  var read_huffman_string = function(huffman_string, tree_top) {
+    var dig = '';
+    var c_node = tree_top;
+    var index = 0;
+    var outstring = '';
+    var huffman_string_array = huffman_string.split('');
+    while (index <= huffman_string_array.length) {
+      //console.log(dig, outstring, c_node.char);
+      if (c_node.left === undefined) {
+        outstring += c_node.char;
+        c_node = tree_top;
+      } else {
+        dig = huffman_string_array[index];
+        if (dig === '0') {
+          c_node = c_node.left;
+        } else if (dig === '1') {
+          c_node = c_node.right;
+        }
+        index += 1;
+      }
+    }
+
+    return outstring;
+  }
+
+  </script>
+</html>

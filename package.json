@@ -1,0 +1,14 @@
+{
+  "name"         : "mini-wiki-grab",
+  "version"      : "0.0.1",
+  "description"  : "Grab data from wikipedia in bunches.",
+  "main"         : "server.js",
+  "author"       : "Sam Hunter",
+  "dependencies" : {
+    "express"    : "latest",
+    "request"    : "latest",
+    "cheerio"    : "latest",
+    "body-parser" : "latest",
+    "website-scraper" : "latest"
+  }
+}

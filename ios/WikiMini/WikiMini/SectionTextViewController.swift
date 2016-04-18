@@ -49,11 +49,11 @@ class SectionTextViewController : UIViewController {
                 }
                 
                 if let huff_string = json[0] as? String {
-                    let huff_tree = json[1] as AnyObject
+                    let huff_tree = json[1] as! [String: String]
                     let huffdecoder = HuffmanDecoder()
-                    var decoded_string = huffdecoder.decode_huff_string(huff_string, huff_tree: huff_tree)
+                    var decoded_string = huffdecoder.decode_huff_string_dict(huff_string, inv_huff_dict: huff_tree)
                     print("decoded string", decoded_string)
-                    decoded_string = decoded_string.stringByReplacingOccurrencesOfString("\n\n\n\n", withString: "")
+                    decoded_string = decoded_string.stringByReplacingOccurrencesOfString("\n\n\n\n\n", withString: "")
                     
                     let attrString : NSMutableAttributedString!
                     do {

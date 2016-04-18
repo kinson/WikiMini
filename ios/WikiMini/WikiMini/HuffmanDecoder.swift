@@ -9,8 +9,22 @@
 import Foundation
 
 class HuffmanDecoder {
-    init() {
-        print("initted")
+    init() {}
+    
+    func decode_huff_string_dict(huff_string: String, inv_huff_dict : [String: String]) -> String {
+        var index = 0
+        var huff_string_array = Array(huff_string.characters)
+        var t_string = ""
+        var outstring = ""
+        while index < huff_string_array.count {
+            t_string += String(huff_string_array[index])
+            if let next_char = inv_huff_dict[t_string] {
+                outstring += next_char
+                t_string = ""
+            }
+            index += 1
+        }
+        return outstring
     }
     
     func decode_huff_string(huff_string: String, huff_tree: AnyObject) -> String {

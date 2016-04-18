@@ -70,7 +70,7 @@
         var section_text = JSON.parse(request.responseText);
         console.log(section_text);
         var result_div = document.getElementById("result");
-        result.innerHTML = read_huffman_string(section_text[0], section_text[1]);
+        result.innerHTML = read_huffman_string_dict(section_text[0], section_text[1]);
         result.style.display = 'block';
       }
     }
@@ -82,6 +82,22 @@
     ));
   }
 
+  //newer uses dictionary to look up chars instead of tree structure
+  var read_huffman_string_dict = function(huffman_string, inv_huffman_dict) {
+    var outstring = '';
+    var t_string = '';
+    var huffman_string_array = huffman_string.split('');
+    for (var index = 0; index < huffman_string.length; index += 1) {
+      t_string += huffman_string_array[index];
+      if (inv_huffman_dict[t_string] !== undefined) {
+        outstring += inv_huffman_dict[t_string];
+        t_string = '';
+      }
+    }
+    return outstring;
+  }
+
+  //deprecated, left here to show process
   var read_huffman_string = function(huffman_string, tree_top) {
     var dig = '';
     var c_node = tree_top;

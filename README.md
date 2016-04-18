@@ -26,7 +26,6 @@ Because creating a custom encoding is unreasonable for the scope of this project
 
 The compressed data, along with a dictionary associating the bit patterns to each character is sent to the client, effectively minimizing the amount of data needed per request.
 
-
 ## Future Works
 If I continued working on this project I would implement local caching on devices so clients could relook up the same data without having to use more data. I would also make the Huffman coding compression two way, minimizing data going to and from the client instead of just to the client from the server.
 
@@ -55,5 +54,6 @@ http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swi
 http://stackoverflow.com/questions/25921204/convert-swift-string-to-array
 
 
-####research linkshttp://stackoverflow.com/questions/818122/which-encoding-is-used-by-the-http-protocol
+####research links
+http://stackoverflow.com/questions/818122/which-encoding-is-used-by-the-http-protocol
 http://stackoverflow.com/questions/19212306/whats-the-difference-between-ascii-and-unicode

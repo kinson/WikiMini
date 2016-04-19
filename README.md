@@ -56,6 +56,7 @@ http://stackoverflow.com/questions/24102044/how-can-i-get-the-unicode-code-point
 http://stackoverflow.com/questions/26181221/how-to-convert-a-decimal-number-to-binary-in-swift
 
 
+
 ####research links
 http://stackoverflow.com/questions/818122/which-encoding-is-used-by-the-http-protocol
 http://stackoverflow.com/questions/19212306/whats-the-difference-between-ascii-and-unicode

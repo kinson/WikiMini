@@ -52,6 +52,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 http://stackoverflow.com/questions/25879837/how-to-display-html-formatted-text-in-ios-label
 http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
 http://stackoverflow.com/questions/25921204/convert-swift-string-to-array
+http://stackoverflow.com/questions/24102044/how-can-i-get-the-unicode-code-points-of-a-character
+http://stackoverflow.com/questions/26181221/how-to-convert-a-decimal-number-to-binary-in-swift
 
 
 ####research links

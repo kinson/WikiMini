@@ -29,11 +29,9 @@
     request.onreadystatechange = function() {
       if (request.readyState === 4) {
         var data = JSON.parse(request.responseText);
-        console.log(data);
         if (data[0] === "BAD_URL") {
           console.log("bad url");
         } else {
-          console.log(data);
           getsections(data[0][0]);
         }
       }
@@ -51,7 +49,6 @@
     request.onreadystatechange = function () {
       if (request.readyState === 4) {
         var section_data = JSON.parse(request.responseText)[0];
-        console.log(section_data);
         getsectiontext(data, 1);
       }
     }
@@ -68,9 +65,10 @@
     request.onreadystatechange = function () {
       if (request.readyState === 4) {
         var section_text = JSON.parse(request.responseText);
-        console.log(section_text);
         var result_div = document.getElementById("result");
-        result.innerHTML = read_huffman_string_dict(section_text[0], section_text[1]);
+        console.log(section_text);
+        var decompressed_ascii = strBinConverter.toBin(section_text[0][0], section_text[0][1]);
+        result.innerHTML = read_huffman_string_dict(decompressed_ascii, section_text[1]);
         result.style.display = 'block';
       }
     }
@@ -119,9 +117,30 @@
         index += 1;
       }
     }
-
     return outstring;
   }
+
+  //use to convert between huffman_string and ascii representation
+  var strBinConverter = {
+  	toStr : function(bin) {
+  		var str = bin.match(/[01]{7}/g).map(function (v) {
+  			return String.fromCharCode(parseInt(v, 2));
+  		}).join("");
+  		if (bin.length % 7 !== 0) {return [str, bin.slice(-1*(bin.length % 7))]}
+  		else {return [str, ''];}
+  	},
+  	toBin: function(str, extra) {
+  		var bin = str.split('').map(function(v) {
+  			var bs = v.charCodeAt(0).toString(2);
+  			return "0000000".slice(bs.length) + bs;
+  		}).join("");
+      if (!extra) {
+        return bin;
+      } else {
+        return bin + extra;
+      }
+  	},
+  };
 
   </script>
 </html>

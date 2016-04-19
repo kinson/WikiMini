@@ -48,9 +48,12 @@ class SectionTextViewController : UIViewController {
                     print(error)
                 }
                 
-                if let huff_string = json[0] as? String {
+                if let ascii_string = json[0] as? [String] {
                     let huff_tree = json[1] as! [String: String]
                     let huffdecoder = HuffmanDecoder()
+                    print(ascii_string[0])
+                    let huff_string = huffdecoder.decode_ascii_compression_to_huff_string(ascii_string[0]) + ascii_string[1]
+                    print(huff_string)
                     var decoded_string = huffdecoder.decode_huff_string_dict(huff_string, inv_huff_dict: huff_tree)
                     print("decoded string", decoded_string)
                     decoded_string = decoded_string.stringByReplacingOccurrencesOfString("\n\n\n\n\n", withString: "")

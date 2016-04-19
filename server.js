@@ -52,6 +52,9 @@ app.post("/api/getsections", function (req, res) {
 });
 
 app.post("/api/getsection", function (req, res) {
+  console.log("emptying dictionary");
+  //huffman.g_huff_dict = {};
+  console.log("dictionary emptied");
   console.log("fetching section");
   var sectionindex = req.body.sectionindex;
   var pagename = req.body.pagename;
@@ -92,9 +95,9 @@ app.post("/api/getsection", function (req, res) {
       var char_counted_length = char_counted.length;
       var sorted_chars = huffman.sort_chars(char_counted);
       var tree_top = huffman.huffman_tree(sorted_chars);
-      huffman.create_huffman_dict(tree_top, '', []);
+      huffman.create_huffman_dict(tree_top, '', true);
       var huff_string = huffman.create_huffman_string(post_strip_html);
-      var inverted_huff_dict = huffman.invert_huffman_dict(huffman.g_huff_dict);
+      var inverted_huff_dict = huffman.invert_huffman_dict(huffman.HuffmanSingleton.getInstance().g_huff_dict);
       var json_inv_huff_dict = JSON.stringify(inverted_huff_dict);
       //console.log(huff_string, g_huff_dict);
       var string_back = huffman.read_huffman_string(huff_string, tree_top);
@@ -112,7 +115,7 @@ app.post("/api/getsection", function (req, res) {
       //console.log("decompress dict length: ", JSON.stringify(huffman.invert_huffman_dict(huffman.g_huff_dict)).length);
       console.log("ratio (huffman coded compressed ascii string + char dictionary)/(raw string): ", (compressed_ascii[0].length + compressed_ascii[1].length + json_inv_huff_dict.length)/post_strip_html.length);
 
-      res.status(200).send([huff_string, inverted_huff_dict]);
+      res.status(200).send([compressed_ascii, inverted_huff_dict]);
     } else {
       res.status(200).send(["NO TEXT FOUND FOR SECTION"]);
     }

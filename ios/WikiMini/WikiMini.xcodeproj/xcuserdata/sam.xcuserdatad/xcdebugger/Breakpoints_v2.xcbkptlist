@@ -26,11 +26,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WikiMini/HuffmanDecoder.swift"
-            timestampString = "482711671.179756"
+            timestampString = "482717312.43267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "decode_huff_string_dict(_:inv_huff_dict:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WikiMini/HuffmanDecoder.swift"
+            timestampString = "482717312.43267"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "decode_huff_string_dict(_:inv_huff_dict:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WikiMini/HuffmanDecoder.swift"
-            timestampString = "482711671.179756"
+            timestampString = "482717312.43267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "decode_huff_string_dict(_:inv_huff_dict:)"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "decode_ascii_compression_to_huff_string(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

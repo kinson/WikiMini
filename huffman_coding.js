@@ -1,4 +1,29 @@
-g_huff_dict = {};
+// var huff = {
+//   g_huff_dict : {},
+//   empty : function () {this.g_huff_dict = {};}
+// };
+
+var HuffmanSingleton = (function () {
+  var instance;
+
+  function createInstance() {
+        return {
+          g_huff_dict : {},
+          empty : function() {
+            g_huff_dict = {};
+          }
+        };
+    }
+
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
 g_inverted_huff_dict = {};
 
 var get_chars = function(html_string) {
@@ -56,30 +81,32 @@ var huffman_tree = function(chars) {
   }
 }
 
-var create_huffman_dict = function(tree_top, path) {
+var create_huffman_dict = function(tree_top, path, empty) {
+  if (empty === true) {console.log("called");HuffmanSingleton.getInstance().empty();}
   if (tree_top.left !== undefined) {
-    create_huffman_dict(tree_top.left, path + '0');
-    create_huffman_dict(tree_top.right, path + '1');
+    create_huffman_dict(tree_top.left, path + '0', false);
+    create_huffman_dict(tree_top.right, path + '1', false);
   } else {
     //var new_path = {'char' : tree_top.char, 'path' : path};
-    g_huff_dict[tree_top.char] = path;
+    HuffmanSingleton.getInstance().g_huff_dict[tree_top.char] = path;
   }
 }
 
 var invert_huffman_dict = function(huff_dict) {
+  var invdict = {}
   for (var hkey in huff_dict) {
     if (huff_dict.hasOwnProperty(hkey)) {
-      g_inverted_huff_dict[huff_dict[hkey]] = hkey;
+      invdict[huff_dict[hkey]] = hkey;
     }
   }
-  return g_inverted_huff_dict;
+  return invdict;
 }
 
 var create_huffman_string = function(instring) {
   var outstring = '';
   var instring_array = instring.split('');
   for (var i = 0; i < instring_array.length; i++) {
-    outstring += g_huff_dict[instring_array[i]];
+    outstring += HuffmanSingleton.getInstance().g_huff_dict[instring_array[i]];
   }
   return outstring;
 }
@@ -140,6 +167,6 @@ module.exports = {
   invert_huffman_dict : invert_huffman_dict,
   read_huffman_string : read_huffman_string,
   strBinConverter : strBinConverter,
-  g_huff_dict : g_huff_dict,
+  HuffmanSingleton : HuffmanSingleton,
   g_inverted_huff_dict : g_inverted_huff_dict
 };
